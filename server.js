@@ -28,15 +28,22 @@ Deno.serve({
 		// If the request is a websocket upgrade,
 		// we need to use the Deno.upgradeWebSocket helper
 		const { socket, response } = Deno.upgradeWebSocket(request);
+		let intervalId;
 
 		socket.onopen = () => {
 			console.log("CONNECTED");
+			intervalId = setInterval(() => {
+				socket.send("new notification");
+			}, 2000);
 		};
 		socket.onmessage = (event) => {
 			console.log(`RECEIVED: ${event.data}`);
 			socket.send("pong");
 		};
-		socket.onclose = () => console.log("DISCONNECTED");
+		socket.onclose = () => {
+			console.log("DISCONNECTED");
+			clearInterval(intervalId);
+		};
 		socket.onerror = (error) => console.error("ERROR:", error);
 
 		return response;

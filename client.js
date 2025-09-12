@@ -18,15 +18,15 @@ window.addEventListener("pageshow", () => {
 
 	websocket.addEventListener("open", () => {
 		log("CONNECTED\n");
-		pingInterval = setInterval(() => {
-			log(`SENT: ping: ${counter}`);
-			websocket.send("ping");
-		}, 2000);
+		// pingInterval = setInterval(() => {
+		// 	log(`SENT: ping: ${counter}`);
+		// 	websocket.send("ping");
+		// }, 2000);
 	});
 
 	websocket.addEventListener("close", () => {
 		log("DISCONNECTED");
-		clearInterval(pingInterval);
+		// clearInterval(pingInterval);
 	});
 
 	websocket.addEventListener("message", (e) => {
