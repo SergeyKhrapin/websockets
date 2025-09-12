@@ -1,6 +1,9 @@
 # README
 
-Websocket example
+Websocket example.
+Can work in 2 ways:
+1. Client sends a message - server sends a message in response
+2. Server sends a message - client handles it
 
 ## Start the app
 
