@@ -10,6 +10,9 @@ function log(text) {
 	logElement.scrollTop = logElement.scrollHeight;
 }
 
+// it's not allowed because of Permissions-Policy response header, so this will cause an error
+window.addEventListener('unload', () => { console.log('do smth') })
+
 // Open the websocket when the page is shown
 window.addEventListener("pageshow", () => {
 	log("OPENING");
