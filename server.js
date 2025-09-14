@@ -1,7 +1,11 @@
 async function createResponse(path, mimeType) {
 	const file = await Deno.open(path, { read: true });
 	const response = new Response(file.readable);
+
 	response.headers.set("Content-Type", mimeType);
+	// unload handler prevents from using bfcache, so we don't allow to use it in the app
+	response.headers.set("Permissions-Policy", "unload=()");
+
 	return response;
 }
 
