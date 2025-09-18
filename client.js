@@ -10,12 +10,22 @@ function log(text) {
 	logElement.scrollTop = logElement.scrollHeight;
 }
 
+function welcomeUser() {
+	const searchParams = new URLSearchParams(location.search);
+	const userName = searchParams.get('user');
+	const h1 = document.createElement('h1');
+	h1.innerHTML = `Welcome, ${userName}`;
+	document.body.prepend(h1);
+}
+
 // it's not allowed because of Permissions-Policy response header, so this will cause an error
 window.addEventListener('unload', () => { console.log('do smth') })
 
 // Open the websocket when the page is shown
 window.addEventListener("pageshow", () => {
 	log("OPENING");
+
+	welcomeUser();
 
 	websocket = new WebSocket(wsUri);
 

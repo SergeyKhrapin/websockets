@@ -6,6 +6,11 @@ async function createResponse(path, mimeType) {
 	// unload handler prevents from using bfcache, so we don't allow to use this handler in the app
 	response.headers.set("Permissions-Policy", "unload=()");
 
+	// CSP - only resources and images that are same-origin are allowed to be loaded
+	response.headers.set("Content-Security-Policy", "default-src 'self'; img-src 'self'");
+	// use the link below to check how it works - image won't be loaded
+	// http://localhost/?user=<img src="https://placehold.jp/150x150.png">
+
 	return response;
 }
 
