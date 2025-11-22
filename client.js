@@ -1,3 +1,18 @@
+const filter = document.getElementById('filter');
+
+filter.addEventListener('change', async () => {
+	// without this a checkbox won't be checked on UI until loop finishes
+	await scheduler.yield();
+
+	const arr = []
+
+	for (let i = 0; i < 50000000; i++) {
+		arr.push(i)
+	}
+
+	console.log('loop finished', arr);
+})
+
 const wsUri = "ws://127.0.0.1/";
 let websocket = null;
 let pingInterval;
