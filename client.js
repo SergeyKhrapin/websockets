@@ -1,17 +1,4 @@
-const filter = document.getElementById('filter');
-
-filter.addEventListener('change', async () => {
-	// without this a checkbox won't be checked on UI until loop finishes
-	await scheduler.yield();
-
-	const arr = []
-
-	for (let i = 0; i < 50000000; i++) {
-		arr.push(i)
-	}
-
-	console.log('loop finished', arr);
-})
+/* Websockets - START */
 
 const wsUri = "ws://127.0.0.1/";
 let websocket = null;
@@ -76,3 +63,37 @@ window.addEventListener("pagehide", () => {
 		window.clearInterval(pingInterval);
 	}
 });
+
+/* Websockets - END */
+
+/* scheduler - START */
+
+const filter = document.getElementById('filter');
+
+filter.addEventListener('change', async () => {
+	// without this a checkbox won't be checked on UI until loop finishes
+	await scheduler.yield();
+
+	const arr = []
+
+	for (let i = 0; i < 50000000; i++) {
+		arr.push(i)
+	}
+
+	console.log('loop finished', arr);
+})
+
+/* scheduler - END */
+
+/* sendBeacon - START */
+
+document.addEventListener("visibilitychange", () => {
+	if (document.visibilityState === "hidden") {
+		navigator.sendBeacon("/analytics", JSON.stringify({
+			pageViews: 132,
+			countries: ['UA', 'UK', 'US']
+		}));
+  }
+});
+
+/* sendBeacon - END */

@@ -14,6 +14,11 @@ async function createResponse(path, mimeType) {
 	return response;
 }
 
+async function createLogAnalyticsResponse(data) {
+	console.log('analytics >>>', data);
+	return new Response();
+}
+
 Deno.serve({
 	port: 80,
 	async handler(request) {
@@ -28,6 +33,8 @@ Deno.serve({
 					return await createResponse("./client.css", "text/css");
 				case "/":
 					return await createResponse("./index.html", "text/html");
+				case "/analytics":
+					return await createLogAnalyticsResponse(request.data);
 				default:
 					return new Response("Not found", {
 						status: 404,
